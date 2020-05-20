@@ -5,9 +5,9 @@ jobs:
     steps:
       - checkout
       - run: cd ./
-         docker build -t spine:1.0 .
+         docker build -t yuvarajnbkr2015/spine:1.0 .
          docker login -u $DOCKER_USER -p $DOCKER_PASS
-         docker push spine:1.0
+         docker push yuvarajnbkr2015/spine:1.0
 
 vultr_deploy:
     machine: true
