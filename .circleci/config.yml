@@ -5,8 +5,8 @@ jobs:
     steps:
       - checkout
       - run: cd ./
+      - run: docker build -t spine:1.0 .
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker build -t spine:1.0 ./
       - run:
           name: Tag and push to docker hub
           command: |
