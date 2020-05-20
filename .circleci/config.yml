@@ -6,11 +6,11 @@ jobs:
       - checkout
       - run: cd ./
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker build -t "${IMAGE_NAME}":1.0
+      - run: docker build -t spine:1.0
       - run:
           name: Tag and push to docker hub
           command: |
-           docker push ${IMAGE_NAME}:1.0
+           docker push spine:1.0
 
 vultr_deploy:
     machine: true
