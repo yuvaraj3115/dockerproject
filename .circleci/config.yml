@@ -8,9 +8,7 @@ jobs:
              docker build -t spine:1.0 .
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
       - run:
-          name: push to docker hub
-          command: |
-           docker push spine
+             docker push spine:1.0
 
 vultr_deploy:
     machine: true
