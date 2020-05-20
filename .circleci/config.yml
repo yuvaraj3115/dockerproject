@@ -4,10 +4,10 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: cd ./
+      - run: 
+             cd ./
              docker build -t spine:1.0 .
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run:
              docker push spine:1.0
 
 vultr_deploy:
