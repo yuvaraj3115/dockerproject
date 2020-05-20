@@ -4,7 +4,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run: cd ./
          docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
          docker build -t ${IMAGE_NAME}:1.0 .
