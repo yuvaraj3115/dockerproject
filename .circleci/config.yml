@@ -24,7 +24,7 @@ vultr_deploy:
           ssh ubuntu@13.250.17.114
 
 workflows:
-  version: 2
+  version: 2.1
   rolling_update:
     jobs:
       - docker_build
