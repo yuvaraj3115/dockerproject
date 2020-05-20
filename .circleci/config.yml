@@ -4,9 +4,9 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: cd ./
+      - run: 
          docker build -t yuvarajnbkr2015/spine:1.0 .
-         docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+         docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker push yuvarajnbkr2015/spine:1.0
 
 vultr_deploy:
