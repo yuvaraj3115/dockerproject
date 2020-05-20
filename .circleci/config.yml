@@ -4,9 +4,7 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run:
-          name: push to dockerhub
-          command: cd ./
+      - run: cd ./
          docker build -t yuvarajnbkr2015/spine:1.0 .
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker push yuvarajnbkr2015/spine:1.0
