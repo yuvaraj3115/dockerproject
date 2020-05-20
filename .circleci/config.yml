@@ -1,14 +1,20 @@
 version: 2
-jobs:
-  docker_build:
-    machine: true
+executors:
+   docker-publisher:
+    environment:
+      IMAGE_NAME: yuvarajnbkr2015/spine
+    docker:
+      - image: circleci/buildpack-deps:stretch
+      
+publish-to-docker-hub:
+    executor: docker-publisher
     steps:
       - checkout
       - run: cd ./
-             docker build -t docker.io/yuvarajnbkr2015/spineor:1.0 ./
+             docker build -t ${IMAGE_NAME}:1.0 ./
              docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-             docker tag -f spineor yuvarajnbkr2015/spineor:1.0
-             docker push -f docker.io/yuvarajnbkr2015/spineor:1.0
+             docker tag -f spineor yuvarajnbkr2015/${IMAGE_NAME}:1.0
+             docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
 
 vultr_deploy:
     machine: true
