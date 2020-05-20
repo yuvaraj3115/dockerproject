@@ -5,8 +5,9 @@ executors:
       IMAGE_NAME: yuvarajnbkr2015/spine
     docker:
       - image: circleci/buildpack-deps:stretch
-      
-publish-to-docker-hub:
+jobs:
+  docker_build:
+    machine: true
     executor: docker-publisher
     steps:
       - checkout
