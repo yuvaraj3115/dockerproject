@@ -24,8 +24,4 @@ workflows:
   rolling_update:
     jobs:
       - docker_build
-      
-          filters:
-            branches:
-              only:
-                - master               
+                     
