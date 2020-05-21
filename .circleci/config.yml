@@ -17,11 +17,7 @@ jobs:
              docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
   
-vultr_deploy:
-    machine: true
-    steps:
-      - run: 
-            ssh ubuntu@13.250.17.114
+
 
 workflows:
   version: 2.1
