@@ -25,10 +25,7 @@ workflows:
   rolling_update:
     jobs:
       - deploy
-          filters:
-            branches:
-              only:
-                - master
+          
         
   
  
