@@ -20,9 +20,8 @@ publish-to-docker-hub:
           
 workflows:
   version: 2.1
-  rolling_update:
     jobs:
-      - docker_build
+       - docker_build
     
 
 
