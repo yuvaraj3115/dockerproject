@@ -5,23 +5,22 @@ executors:
       IMAGE_NAME: yuvarajnbkr2015/spine
     docker:
       - image: circleci/buildpack-deps:stretch
-    
-jobs:
-  docker_build:
-    machine: true
+      
+      
+      
+publish-to-docker-hub:
     executor: docker-publisher
     steps:
       - checkout
+      - setup_remote_docker
+      - *restore-cache
+      - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
       - run: cd ./
              docker build -t ${IMAGE_NAME}:1.0 ./
-             docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
-  
+    
 
 
-workflows:
-  version: 2.1
-  rolling_update:
-    jobs:
-      - docker_build
+
+
                      
