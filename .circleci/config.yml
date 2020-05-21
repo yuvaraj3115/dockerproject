@@ -9,10 +9,10 @@ jobs:
       - run: docker push yuvarajnbkr2015/spine:1.0
      
      
-vultr_deploy:
-    machine: true
-    steps:
-      - run: |
+deployment:
+  push_to_server:
+    branch: master
+    commands:
           ssh ubunntu@13.250.17.114 
           
 workflows:
@@ -20,7 +20,7 @@ workflows:
   rolling_update:
     jobs:
       - docker_build
-      - vultr_deploy
+      - deployment:
           requires:
             - docker_build
           filters:
