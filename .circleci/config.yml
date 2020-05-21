@@ -1,27 +1,30 @@
 version: 2
 jobs:
-  docker_build:
-    machine: true
+  deploy:
+    docker:
+      - image: circleci/golang:1.10
     steps:
-      - checkout
-      - run: docker build -t yuvarajnbkr2015/spine:1.0 .   
-      - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker push yuvarajnbkr2015/spine:1.0
+      - attach_workspace:
+          at: src
+      - add_ssh_keys
+      - run: |
+          docker build -t yuvarajnbkr2015/spine:1.0 .
+          - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
+          - run: docker push yuvarajnbkr2015/spine:1.0
+          echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
+          ssh root@example.com <<'ENDSSH'
+          docker pull yuvarajnbkr2015/spine:1.0
+          docker run spine
+          ENDSSH
      
      
-  deployment:
-   push_to_server:
-    branch: master
-    commands: ssh ubunntu@13.250.17.114 
+  
           
 workflows:
   version: 2
   rolling_update:
     jobs:
-      - docker_build
-      - deployment:
-          requires:
-            - docker_build
+      - deploy
           filters:
             branches:
               only:
