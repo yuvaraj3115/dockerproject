@@ -17,8 +17,6 @@ jobs:
     executor: app-executor
     steps:
       - checkout
-
-
   publish-to-docker-hub:
     executor: docker-publisher
     steps:
@@ -28,6 +26,12 @@ jobs:
       - run: cd ./
              docker build -t ${IMAGE_NAME}:1.0 .
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
+ 
+
+
+  
+             
+
 
 
 
