@@ -29,21 +29,11 @@ jobs:
              docker build -t ${IMAGE_NAME}:1.0 .
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
 
-vultr_deploy:
-    machine: true
-    steps:
-      - run: 
-            ssh ubuntu@13.250.17.114
-
 
 workflows:
   version: 2.1
-  rolling_update:
    jobs:
     - build
-    - vultr_deploy:
-       requires:
-        - build
        filters:
         branches:
          only:
