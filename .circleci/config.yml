@@ -31,13 +31,13 @@ jobs:
 
 
 workflows:
-  version: 2.1
-   jobs:
-    - build
-       filters:
-        branches:
-         only:
-          - master
+ version: 2.1
+  jobs:
+   - build
+      filters:
+       branches:
+        only:
+         - master
 
 
 
