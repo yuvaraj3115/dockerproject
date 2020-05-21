@@ -6,7 +6,7 @@ jobs:
       - checkout
       - run: docker build -t spine:1.0 ./    
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker push docker.io/yuvarajnbkr2015/spine:1.0
+      - run: docker push docker.io/yuvarajnbkr2015/spine
      
      
 vultr_deploy:
