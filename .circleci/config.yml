@@ -1,16 +1,26 @@
 version: 2.1
 executors:
-   docker-publisher:
-    environment:
-      IMAGE_NAME: yuvarajnbkr2015/spine
+  app-executor:
     docker:
-      - image: circleci/buildpack-deps:stretch
-      
-      
-      
+      - image: circleci/node:13.12.0
+    working_directory: ~/repo
+
+  docker-publisher:
+    environment:
+      IMAGE_NAME: spine
+    docker:
+      - image: yuvarajnbkr2015/${IMAGE_NAME}
+
+
 jobs:
-  docker_build:
-    machine: true
+  build:
+    executor: app-executor
+    steps:
+      - checkout
+      - *show-current-branch-name
+
+
+  publish-to-docker-hub:
     executor: docker-publisher
     steps:
       - checkout
@@ -19,26 +29,27 @@ jobs:
       - run: cd ./
              docker build -t ${IMAGE_NAME}:1.0 .
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
-             
+
 vultr_deploy:
     machine: true
     steps:
-      - run: |
-          ssh ubuntu@13.250.17.114
-          
+      - run: 
+            ssh ubuntu@13.250.17.114
+
+
 workflows:
   version: 2.1
-  jobs:
-   - docker_build
-   - vultr_deploy:
-      requires:
-       - docker_build
-      filters:
-       branches:
-        only:
-         - master
-    
-
+  rolling_update:
+  build_and_deploy:
+    jobs:
+      - build
+       - vultr_deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
 
 
 
