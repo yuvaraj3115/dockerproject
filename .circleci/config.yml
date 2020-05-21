@@ -4,10 +4,7 @@ jobs:
     docker:
       - image: circleci/golang:1.10
     steps:
-      - attach_workspace:
-          at: src
-      - add_ssh_keys
-      - run: docker build -t yuvarajnbkr2015/spine:1.0 .
+      - run: docker build -t yuvarajnbkr2015/spine:1.0 ./
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
       - run: docker push yuvarajnbkr2015/spine:1.0
       - run: ssh root@example.com <<'ENDSSH'
