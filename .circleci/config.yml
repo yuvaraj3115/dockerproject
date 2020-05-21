@@ -19,7 +19,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run:
+      - run: cd ./ |
              docker build -t ${IMAGE_NAME}:1.0 .
       - run: docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
         
