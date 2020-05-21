@@ -9,7 +9,7 @@ executors:
     environment:
       IMAGE_NAME: spine
     docker:
-      - image: ${IMAGE_NAME}
+      - image: ${IMAGE_NAME}:2.0
 
 
 jobs:
@@ -18,9 +18,9 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: docker build -t ${IMAGE_NAME} .    
+      - run: docker build -t ${IMAGE_NAME}:2.0 ./    
       - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker push docker.io/yuvarajnbkr2015/${IMAGE_NAME}
+      - run: docker push docker.io/yuvarajnbkr2015/${IMAGE_NAME}:2.0
         
   
  
