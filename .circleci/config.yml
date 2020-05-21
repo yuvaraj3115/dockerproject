@@ -9,7 +9,7 @@ jobs:
       - run: docker push docker.io/yuvarajnbkr2015/${IMAGE_NAME}:1.0
      
      
- vultr_deploy:
+vultr_deploy:
     machine: true
     steps:
       - run: |
