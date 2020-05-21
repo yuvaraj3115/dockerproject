@@ -17,6 +17,12 @@ publish-to-docker-hub:
       - run: cd ./
              docker build -t ${IMAGE_NAME}:1.0 ./
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
+          
+workflows:
+  version: 2.1
+  rolling_update:
+    jobs:
+      - docker_build
     
 
 
