@@ -30,10 +30,7 @@ jobs:
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
 
 
-workflows:
- version: 2.1
-  jobs:
-   build
+
     
 
 
