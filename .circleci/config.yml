@@ -11,7 +11,6 @@ jobs:
           docker build -t yuvarajnbkr2015/spine:1.0 .
           - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
           - run: docker push yuvarajnbkr2015/spine:1.0
-          echo 'example.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBJiGRY6N9WYQ0vy6cTiwAgNbc6ueJmVo/EafBtmT7bcD6cQMbipYM/KfYQ2lCn2TxqWepZKYoyoVQXgArycCOns=' >> ~/.ssh/known_hosts
           ssh root@example.com <<'ENDSSH'
           docker pull yuvarajnbkr2015/spine:1.0
           docker run spine
