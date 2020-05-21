@@ -9,7 +9,7 @@ executors:
     environment:
       IMAGE_NAME: spine
     docker:
-      - image: yuvarajnbkr2015/${IMAGE_NAME}
+      - image: ${IMAGE_NAME}
 
 
 jobs:
