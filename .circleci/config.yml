@@ -12,7 +12,7 @@ jobs:
   deployment:
    push_to_server:
     branch: master
-     commands: ssh ubunntu@13.250.17.114 
+    commands: ssh ubunntu@13.250.17.114 
           
 workflows:
   version: 2
