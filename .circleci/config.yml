@@ -39,15 +39,15 @@ vultr_deploy:
 workflows:
   version: 2.1
   rolling_update:
-    jobs:
-      - build
-      - vultr_deploy:
-         requires:
-           - build
-         filters:
-           branches:
-             only:
-               - master
+   jobs:
+    - build
+    - vultr_deploy:
+       requires:
+        - build
+       filters:
+        branches:
+         only:
+          - master
 
 
 
