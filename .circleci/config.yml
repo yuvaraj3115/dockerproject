@@ -9,7 +9,7 @@ jobs:
       - run: docker push yuvarajnbkr2015/spine:1.0
      
      
-deployment:
+  deployment:
   push_to_server:
     branch: master
     commands:
