@@ -5,10 +5,6 @@ executors:
       IMAGE_NAME: yuvarajnbkr2015/spine
     docker:
       - image: circleci/buildpack-deps:stretch
-   app-executor:
-    docker:
-      - image: circleci/node:13.12.0
-    working_directory: ~/repo
     
 jobs:
   docker_build:
@@ -19,28 +15,23 @@ jobs:
       - run: cd ./
              docker build -t ${IMAGE_NAME}:1.0 ./
              docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-             docker tag -f spineor yuvarajnbkr2015/${IMAGE_NAME}:1.0
              docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
-  linting:
-    executor: app-executor
+  
+vultr_deploy:
+    machine: true
     steps:
-      - checkout
-      - *show-current-branch-name
-      - *restore-cache
-      - run:
-          name: Run linting
-          command: npm run lint
-          
-  workflows:
-  build_and_deploy:
+      - run: 
+            ssh ubuntu@13.250.17.114
+
+workflows:
+  version: 2.1
+  rolling_update:
     jobs:
-      - build
-      - linting:
+      - docker_build
+      - vultr_deploy:
           requires:
-            - build
+            - docker_build
           filters:
             branches:
               only:
-                - develop
-                - staging
-                - master
+                - master               
