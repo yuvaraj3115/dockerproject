@@ -20,7 +20,7 @@ workflows:
   rolling_update:
     jobs:
       - docker_build
-      - vultr_deploy:
+      - vultr_deploy
           requires:
             - docker_build
           filters:
