@@ -17,7 +17,6 @@ jobs:
     executor: app-executor
     steps:
       - checkout
-      - *show-current-branch-name
 
 
   publish-to-docker-hub:
