@@ -1,21 +1,32 @@
 version: 2
 jobs:
-  deploy:
-    docker:
-      - image: circleci/golang:1.10
+  docker_build:
+    machine: true
     steps:
-      - run: docker build -t yuvarajnbkr2015/spine:1.0 ./
-      - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
-      - run: docker push yuvarajnbkr2015/spine:1.0
-      - run: ssh root@example.com 
-      - run: docker pull yuvarajnbkr2015/spine:1.0
-      - run: docker run spine
-               
+      - checkout
+      - run: |
+         docker build -t ${IMAGE_NAME}:1.0 .
+         docker login -u $DOCKER_USER -p $DOCKER_PASS
+         docker push yuvarajnbkr2015/${IMAGE_NAME}:1.0
+         
+vultr_deploy:
+    machine: true
+    steps:
+      - run: |
+          ssh ubuntu@13.250.17.114 
+          
 workflows:
   version: 2
   rolling_update:
     jobs:
-      - deploy
+      - docker_build
+      - vultr_deploy:
+          requires:
+            - docker_build
+          filters:
+            branches:
+              only:
+                - master
           
         
   
