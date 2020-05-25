@@ -5,7 +5,7 @@ jobs:
     steps:
       - checkout
       - run: |
-         docker build -t spineor:1.0 .
+         docker build -t spineor:1.0 ./
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker push yuvarajnbkr2015/spineor:1.0
          
@@ -13,7 +13,7 @@ vultr_deploy:
     machine: true
     steps:
       - run: |
-          ssh ubuntu@13.250.17.114 
+          ssh ubuntu@54.179.48.70
           
 workflows:
   version: 2
