@@ -5,7 +5,7 @@ jobs:
     steps:
       - checkout
       - run: cd ./
-         docker build -t spineor:1.0 ./
+         docker build -t spineor:1.0 .
          docker login -u $DOCKER_USER -p $DOCKER_PASS
          docker push yuvarajnbkr2015/spineor:1.0
          
