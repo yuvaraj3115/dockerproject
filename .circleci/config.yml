@@ -42,7 +42,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build
-       - vultr_deploy:
+      - vultr_deploy:
           requires:
             - build
           filters:
