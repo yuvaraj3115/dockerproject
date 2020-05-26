@@ -1,32 +1,43 @@
-version: 2
+version: 2.1
+executors:
+   docker-publisher:
+    environment:
+      IMAGE_NAME: spine
+    docker:
+      - image: circleci/buildpack-deps:stretch
+      
+      
+      
 jobs:
   docker_build:
     machine: true
+    executor: docker-publisher
     steps:
       - checkout
+      - setup_remote_docker
+      - run: docker login -u "${DOCKER_USER}" -p "${DOCKER_PASS}"
       - run: cd ./
-         docker build -t spineor:1.0 .
-         docker login -u $DOCKER_USER -p $DOCKER_PASS
-         docker push yuvarajnbkr2015/spineor:1.0
-         
+             docker build -t ${IMAGE_NAME}:1.0 .
+             docker push -f yuvarajnbkr2015/${IMAGE_NAME}:1.0
+             
 vultr_deploy:
     machine: true
     steps:
       - run: |
-          ssh ubuntu@54.179.48.70
+          ssh ubuntu@13.250.17.114
           
 workflows:
-  version: 2
-  rolling_update:
-    jobs:
-      - docker_build
-      - vultr_deploy:
-          requires:
-            - docker_build
-          filters:
-            branches:
-              only:
-                - master
+  version: 2.1
+  jobs:
+   - docker_build
+   - vultr_deploy:
+      requires:
+       - docker_build
+      filters:
+       branches:
+        only:
+         - master
+      
           
         
   
